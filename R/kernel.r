@@ -31,22 +31,6 @@ wire_to_msg = function(parts) {
     if (!identical(connection_info$key, '')) {
         signature <- rawToChar(parts[[i + 1]])
         expected_signature <- sign_msg(parts[(i + 2):(i + 5)])
-        if (!identical(signature, expected_signature)){
-            print("Recieved Signature")
-            paste(signature)
-            paste("Expected Signature")
-            paste(expected_signature)
-            header        <- fromRawJSON(parts[[i + 2]])
-            parent_header <- fromRawJSON(parts[[i + 3]])
-            metadata      <- fromRawJSON(parts[[i + 4]])
-            content       <- fromRawJSON(parts[[i + 5]])
-            list(
-                header        = header,
-                parent_header = parent_header,
-                metadata      = metadata,
-                content       = content)
-            paste(list)
-        }
         stopifnot(identical(signature, expected_signature))
     }
 
